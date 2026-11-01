@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusFind – Campus Lost & Found Portal</title>
+    <meta name="description" content="Official university campus lost and found portal to report, browse, and recover lost belongings easily and securely.">
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons 1.11.3 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="100" tabindex="0">
+
+    <!-- ======================================================================
+         A. NAVIGATION BAR
+         ====================================================================== -->
+    <nav id="mainNav" class="navbar navbar-expand-lg fixed-top navbar-custom" aria-label="Main Navigation">
+        <div class="container">
+            <!-- Brand Logo with Search Icon -->
+            <a class="navbar-brand" href="#home">
+                <span class="brand-icon-box me-2">
+                    <i class="bi bi-search-heart"></i>
+                </span>
+                <span>Campus<span class="text-primary">Find</span></span>
+            </a>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links & Actions -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#browse">Browse Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+
+                <!-- Report Item Button -->
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-primary btn-report-nav" onclick="openReportModal('Lost')">
+                        <i class="bi bi-plus-circle me-1"></i> Report Item
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ======================================================================
+         B. HERO SECTION
+         ====================================================================== -->
+    <header id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <!-- Hero Left Content -->
+                <div class="col-lg-7 text-center text-lg-start">
+                    <div class="hero-badge mb-3">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Official University Lost &amp; Found Portal</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Lost Something <br>
+                        <span class="text-gradient">on Campus?</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        CampusFind helps students and faculty report lost belongings, log found valuables, and securely connect with their rightful owners in minutes.
+                    </p>
+
+                    <!-- Hero Search Bar -->
+                    <div class="hero-search-wrapper mx-auto mx-lg-0">
+                        <i class="bi bi-search text-primary fs-5 me-2"></i>
+                        <input type="text" id="heroSearchInput" placeholder="Search AirPods, ID card, backpack, calculator..." aria-label="Search items on campus">
+                        <button class="btn btn-primary rounded-pill px-4 fw-semibold" id="heroSearchBtn">
+                            Search
+                        </button>
+                    </div>
+
+                    <!-- Call-to-Action Buttons -->
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-4">
+                        <button class="btn btn-danger px-4 py-2 rounded-pill fw-semibold shadow-sm" onclick="openReportModal('Lost')">
+                            <i class="bi bi-exclamation-circle-fill me-1"></i> Report Lost Item
+                        </button>
+                        <button class="btn btn-success px-4 py-2 rounded-pill fw-semibold shadow-sm" onclick="openReportModal('Found')">
+                            <i class="bi bi-check-circle-fill me-1"></i> Report Found Item
+                        </button>
+                        <a href="#browse" class="btn btn-outline-secondary px-4 py-2 rounded-pill fw-semibold">
+                            <i class="bi bi-grid-3x3-gap me-1"></i> Browse All
+                        </a>
+                    </div>
+
+                    <!-- Campus Trust Note -->
+                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-2 text-muted small">
+                        <i class="bi bi-mortarboard-fill text-primary"></i>
+                        <span>Connected with Campus Security &amp; Student Union Desks</span>
+                    </div>
+                </div>
+
+                <!-- Hero Right Illustration / Floating Visual -->
+                <div class="col-lg-5">
+                    <div class="hero-visual-card">
+                        <!-- Floating Pill 1 -->
+                        <div class="floating-pill floating-pill-1">
+                            <div class="bg-success text-white rounded-circle p-1 d-inline-flex">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+                            <div>
+                                <span class="d-block text-dark fw-bold" style="font-size: 0.82rem;">AirPods Reclaimed</span>
+                                <small class="text-muted" style="font-size: 0.72rem;">Central Library • Just now</small>
+                            </div>
+                        </div>
+
+                        <!-- Main Graphic Image -->
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Students on university campus collaborating" class="hero-illustration-img shadow-sm">
+
+                        <!-- Floating Pill 2 -->
+                        <div class="floating-pill floating-pill-2">
+                            <div class="bg-primary text-white rounded-circle p-1 d-inline-flex">
+                                <i class="bi bi-shield-lock-fill"></i>
+                            </div>
+                            <div>
+                                <span class="d-block text-dark fw-bold" style="font-size: 0.82rem;">Verified Ownership</span>
+                                <small class="text-muted" style="font-size: 0.72rem;">Campus Safety Verified</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======================================================================
+         C. STATISTICS SECTION
+         ====================================================================== -->
+    <section class="stats-section mb-5">
+        <div class="container">
+            <div class="row g-3 g-md-4">
+                <!-- Total Reports -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon total">
+                            <i class="bi bi-clipboard2-data"></i>
+                        </div>
+                        <div>
+                            <div class="stat-number" id="statTotal">0</div>
+                            <p class="stat-label">Total Reports</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lost Items -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon lost">
+                            <i class="bi bi-question-circle"></i>
+                        </div>
+                        <div>
+                            <div class="stat-number" id="statLost">0</div>
+                            <p class="stat-label">Lost Items</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Found Items -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon found">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <div>
+                            <div class="stat-number" id="statFound">0</div>
+                            <p class="stat-label">Found Items</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Successfully Returned Items -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon returned">
+                            <i class="bi bi-patch-check"></i>
+                        </div>
+                        <div>
+                            <div class="stat-number" id="statReturned">0</div>
+                            <p class="stat-label">Returned Items</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         D. CATEGORIES SECTION
+         ====================================================================== -->
+    <section id="categories" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold mb-2">
+                    Organized Inventory
+                </span>
+                <h2 class="fw-bold">Browse by Category</h2>
+                <p class="text-muted">Quickly locate your missing items by browsing our primary campus categories</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Electronics -->
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="category-card" data-category="Electronics" onclick="filterByCategory('Electronics')">
+                        <div class="category-icon-box">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+                        <h4 class="category-title">Electronics</h4>
+                        <span class="category-count" data-category-count="Electronics">0 items</span>
+                    </div>
+                </div>
+
+                <!-- Documents -->
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="category-card" data-category="Documents" onclick="filterByCategory('Documents')">
+                        <div class="category-icon-box">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h4 class="category-title">Documents</h4>
+                        <span class="category-count" data-category-count="Documents">0 items</span>
+                    </div>
+                </div>
+
+                <!-- Accessories -->
+                <div class="col-6 col-md-4 col-lg">
+                    <div class="category-card" data-category="Accessories" onclick="filterByCategory('Accessories')">
+                        <div class="category-icon-box">
+                            <i class="bi bi-sunglasses"></i>
+                        </div>
+                        <h4 class="category-title">Accessories</h4>
+                        <span class="category-count" data-category-count="Accessories">0 items</span>
+                    </div>
+                </div>
+
+                <!-- Books -->
+                <div class="col-6 col-md-6 col-lg">
+                    <div class="category-card" data-category="Books" onclick="filterByCategory('Books')">
+                        <div class="category-icon-box">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <h4 class="category-title">Books</h4>
+                        <span class="category-count" data-category-count="Books">0 items</span>
+                    </div>
+                </div>
+
+                <!-- Personal Belongings -->
+                <div class="col-12 col-md-6 col-lg">
+                    <div class="category-card" data-category="Personal Belongings" onclick="filterByCategory('Personal Belongings')">
+                        <div class="category-icon-box">
+                            <i class="bi bi-bag"></i>
+                        </div>
+                        <h4 class="category-title">Personal Items</h4>
+                        <span class="category-count" data-category-count="Personal Belongings">0 items</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         E. & F. SEARCH, FILTER & RECENTLY REPORTED ITEMS
+         ====================================================================== -->
+    <section id="browse" class="py-5">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                <div>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold mb-2">
+                        Live Listings
+                    </span>
+                    <h2 class="fw-bold mb-1">Recently Reported Items</h2>
+                    <p class="text-muted mb-0">Browse recently lost and found articles across campus facilities.</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill" id="itemsCountBadge">
+                        Loading items...
+                    </span>
+                    <button class="btn btn-outline-primary btn-sm rounded-pill px-3" onclick="openReportModal('Lost')">
+                        <i class="bi bi-plus-lg me-1"></i> Add Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- F. SEARCH AND FILTER FUNCTIONALITY TOOLBAR -->
+            <div class="filter-bar">
+                <div class="row g-3 align-items-center">
+                    <!-- Keyword Search -->
+                    <div class="col-12 col-lg-4">
+                        <div class="input-group search-input-group">
+                            <input type="text" id="browseSearchInput" class="form-control" placeholder="Search by item name, room, or detail..." aria-label="Search items">
+                            <button class="input-group-text border-start-0" id="clearSearchBtn" title="Clear search">
+                                <i class="bi bi-x-circle text-muted"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Category Dropdown -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <select class="form-select form-select-pill" id="categoryFilterSelect" aria-label="Filter by category">
+                            <option value="All" selected>All Categories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Documents">Documents &amp; IDs</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Books">Books &amp; Study Material</option>
+                            <option value="Personal Belongings">Personal Belongings</option>
+                        </select>
+                    </div>
+
+                    <!-- Status Filter (All, Lost, Found) -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="btn-group w-100 filter-btn-group" role="group" aria-label="Filter by status">
+                            <input type="radio" class="btn-check" name="filterStatus" id="statusAll" value="All" checked autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="statusAll">All</label>
+
+                            <input type="radio" class="btn-check" name="filterStatus" id="statusLost" value="Lost" autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="statusLost">Lost</label>
+
+                            <input type="radio" class="btn-check" name="filterStatus" id="statusFound" value="Found" autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="statusFound">Found</label>
+                        </div>
+                    </div>
+
+                    <!-- Sort Dropdown & Reset Button -->
+                    <div class="col-12 col-lg-2 d-flex gap-2">
+                        <select class="form-select form-select-pill flex-grow-1" id="sortSelect" aria-label="Sort items">
+                            <option value="newest" selected>Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                        <button class="btn btn-outline-danger rounded-circle p-2" id="resetFiltersBtn" title="Reset all filters" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Items Cards Grid -->
+            <div id="itemsGrid" class="row g-4">
+                <!-- Dynamically populated via script.js -->
+            </div>
+
+            <!-- Empty State (When no items match search/filter) -->
+            <div id="emptyState" class="empty-state-box d-none">
+                <i class="bi bi-search empty-state-icon"></i>
+                <h4 class="fw-bold">No Matching Items Found</h4>
+                <p class="text-muted mb-4">We couldn't find any items matching your active search terms or filters.</p>
+                <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-primary rounded-pill px-4" id="emptyStateResetBtn">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i> Clear Filters
+                    </button>
+                    <button class="btn btn-outline-primary rounded-pill px-4" onclick="openReportModal('Lost')">
+                        <i class="bi bi-plus-circle me-1"></i> Report Missing Item
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         I. HOW IT WORKS SECTION
+         ====================================================================== -->
+    <section id="how-it-works" class="how-it-works-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold mb-2">
+                    Simple Process
+                </span>
+                <h2 class="fw-bold">How CampusFind Works</h2>
+                <p class="text-muted">A streamlined, secure 3-step workflow designed specifically for our university campus</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <!-- Step 1 -->
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="bi bi-file-earmark-plus"></i>
+                        </div>
+                        <h4 class="step-title">Report Your Item</h4>
+                        <p class="step-desc">
+                            Lost an item or found something unattended? Create a quick report specifying the item category, campus location, and description.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <h4 class="step-title">Browse &amp; Connect</h4>
+                        <p class="step-desc">
+                            Filter through active listings. Use our integrated contact button to safely reach out to the finder or loser using verified student emails.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="step-title">Recover Belongings</h4>
+                        <p class="step-desc">
+                            Meet at an authorized campus location like the Library Desk or Campus Security Office to verify ownership and reclaim your item safely.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety Recommendation Banner -->
+            <div class="safety-banner">
+                <i class="bi bi-info-circle-fill text-primary fs-3 flex-shrink-0"></i>
+                <div class="flex-grow-1">
+                    <strong class="text-dark d-block">Campus Safe Exchange Zone</strong>
+                    <span class="text-muted small">For safety and security, always meet during daylight hours at designated campus safe exchange locations such as the Central Library Reception or the Campus Police Desk (Student Center Rm 102).</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         H. ABOUT SECTION
+         ====================================================================== -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold mb-2">
+                        About The Initiative
+                    </span>
+                    <h2 class="fw-bold mb-3">Empowering Our University with a Smarter Lost &amp; Found</h2>
+                    <p class="text-muted mb-4">
+                        CampusFind was created to eliminate bulletin-board clutter and fragmented social media posts. Every year, hundreds of valuable textbooks, calculators, student IDs, and keys go unclaimed simply because there is no unified platform.
+                    </p>
+
+                    <!-- Feature Box 1 -->
+                    <div class="about-feature-box">
+                        <div class="about-feature-icon">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Fast &amp; Direct Communication</h5>
+                            <p class="text-muted small mb-0">Connect directly with students and campus departments with zero red tape and instant alerts.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature Box 2 -->
+                    <div class="about-feature-box">
+                        <div class="about-feature-icon">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Campus Community Driven</h5>
+                            <p class="text-muted small mb-0">Built specifically for students, teaching assistants, faculty, and campus maintenance staff.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature Box 3 -->
+                    <div class="about-feature-box">
+                        <div class="about-feature-icon">
+                            <i class="bi bi-database-check"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Transparent &amp; Accountable</h5>
+                            <p class="text-muted small mb-0">Track item recovery status from report submission all the way to return confirmation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" alt="University Campus Building" class="img-fluid rounded-4 shadow-lg">
+                        <div class="position-absolute bottom-0 start-0 m-4 p-3 bg-white rounded-3 shadow-md border d-none d-sm-block">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-primary text-white rounded-circle p-2">
+                                    <i class="bi bi-trophy-fill fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">94% Recovery Rate</h6>
+                                    <small class="text-muted">For items reported within 48 hours</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         J. CONTACT SECTION
+         ====================================================================== -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold mb-2">
+                    Help &amp; Support
+                </span>
+                <h2 class="fw-bold">Contact Campus Support</h2>
+                <p class="text-muted">Need assistance locating high-value belongings or contacting the security desk?</p>
+            </div>
+
+            <div class="row g-4 g-lg-5">
+                <!-- Left: Support & Security Office Info -->
+                <div class="col-lg-5">
+                    <div class="contact-info-card">
+                        <h4 class="fw-bold mb-4">Campus Lost &amp; Found Office</h4>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Physical Location</h6>
+                                <p class="text-white-50 small mb-0">Campus Safety Headquarters<br>Student Activity Center, Room 102</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-clock-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Operating Hours</h6>
+                                <p class="text-white-50 small mb-0">Monday – Friday: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 1:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-telephone-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Helpline Phone</h6>
+                                <p class="text-white-50 small mb-0">+1 (800) 555-CAMPUS<br>Extension: 4242 (Lost &amp; Found)</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item mb-0">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Official Email</h6>
+                                <p class="text-white-50 small mb-0">lostfound@campus.edu<br>campus.security@campus.edu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Contact Form -->
+                <div class="col-lg-7">
+                    <div class="contact-form-card">
+                        <h4 class="fw-bold mb-2">Send a Message to Support</h4>
+                        <p class="text-muted small mb-4">Our campus desk responds to inquiries within 2-4 operating hours.</p>
+
+                        <form id="supportContactForm" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="supportName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="supportName" placeholder="e.g. Alex Johnson" required>
+                                    <div class="invalid-feedback">Please enter your name.</div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="supportStudentId" class="form-label">Student / Staff ID <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="supportStudentId" placeholder="e.g. STU-2026-904" required>
+                                    <div class="invalid-feedback">Please enter your student or staff ID.</div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="supportEmail" class="form-label">Campus Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="supportEmail" placeholder="e.g. alex.j@campus.edu" required>
+                                    <div class="invalid-feedback">Please enter a valid campus email address.</div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="supportSubject" class="form-label">Inquiry Subject <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="supportSubject" required>
+                                        <option value="" disabled selected>Select a subject...</option>
+                                        <option value="Inquire High-Value Item">Inquire High-Value Item (Laptop/Phone)</option>
+                                        <option value="ID / Access Card Recovery">ID Card / Access Card Recovery</option>
+                                        <option value="Campus Security Custody">Item in Security Custody</option>
+                                        <option value="General Question">General Question</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a subject.</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="supportMessage" class="form-label">Message Details <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="supportMessage" rows="4" placeholder="Describe the item or issue in detail..." required></textarea>
+                                    <div class="invalid-feedback">Please provide your message.</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold">
+                                        <i class="bi bi-send-fill me-1"></i> Send Support Request
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         K. FOOTER
+         ====================================================================== -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row g-4 justify-content-between">
+                <!-- Col 1: Logo & Mission -->
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="brand-icon-box me-2">
+                            <i class="bi bi-search-heart"></i>
+                        </span>
+                        <span class="text-white fw-bold fs-4">Campus<span class="text-primary">Find</span></span>
+                    </div>
+                    <p class="small text-secondary mb-3">
+                        CampusFind is the dedicated digital lost and found portal designed to connect students, professors, and university security to return misplaced belongings quickly and safely.
+                    </p>
+                    <span class="demo-data-badge">
+                        <i class="bi bi-code-slash me-1"></i> College Practical Web Application
+                    </span>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="bi bi-chevron-right me-1 small"></i> Home</a></li>
+                        <li><a href="#browse"><i class="bi bi-chevron-right me-1 small"></i> Browse Items</a></li>
+                        <li><a href="#categories"><i class="bi bi-chevron-right me-1 small"></i> Categories</a></li>
+                        <li><a href="#how-it-works"><i class="bi bi-chevron-right me-1 small"></i> How It Works</a></li>
+                        <li><a href="#about"><i class="bi bi-chevron-right me-1 small"></i> About Us</a></li>
+                        <li><a href="#contact"><i class="bi bi-chevron-right me-1 small"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Categories -->
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5>Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="#browse" onclick="filterByCategory('Electronics')"><i class="bi bi-chevron-right me-1 small"></i> Electronics</a></li>
+                        <li><a href="#browse" onclick="filterByCategory('Documents')"><i class="bi bi-chevron-right me-1 small"></i> Documents &amp; IDs</a></li>
+                        <li><a href="#browse" onclick="filterByCategory('Accessories')"><i class="bi bi-chevron-right me-1 small"></i> Accessories</a></li>
+                        <li><a href="#browse" onclick="filterByCategory('Books')"><i class="bi bi-chevron-right me-1 small"></i> Books</a></li>
+                        <li><a href="#browse" onclick="filterByCategory('Personal Belongings')"><i class="bi bi-chevron-right me-1 small"></i> Personal Items</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Campus Contact Info -->
+                <div class="col-lg-3">
+                    <h5>Campus Office</h5>
+                    <p class="small mb-2">
+                        <i class="bi bi-building me-2 text-primary"></i> Student Center, Room 102
+                    </p>
+                    <p class="small mb-2">
+                        <i class="bi bi-telephone me-2 text-primary"></i> +1 (800) 555-CAMPUS
+                    </p>
+                    <p class="small mb-3">
+                        <i class="bi bi-envelope me-2 text-primary"></i> lostfound@campus.edu
+                    </p>
+                    <div>
+                        <button class="btn btn-outline-light btn-sm rounded-pill" id="resetDemoDataBtn" title="Reset sample demonstration items">
+                            <i class="bi bi-arrow-clockwise me-1"></i> Reset Demo Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright and Disclaimer -->
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-secondary">
+                    &copy; 2026 CampusFind Portal. Developed for Academic Practical Examination.
+                </p>
+                <p class="mb-0 text-secondary small">
+                    Built with HTML5, CSS3, Bootstrap 5 &amp; Vanilla JavaScript.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================================================
+         G. REPORT ITEM MODAL (Bootstrap 5 Modal with Form Validation)
+         ====================================================================== -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="bg-primary text-white rounded-circle p-2 d-inline-flex">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title fw-bold mb-0" id="reportModalLabel">Report an Item</h5>
+                            <small class="text-muted" id="reportModalSubtitle">Post a lost or found article to help reunite it with its owner</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="reportItemForm" novalidate>
+                    <div class="modal-body">
+                        <!-- Report Type Toggle (Lost vs Found) -->
+                        <div class="mb-4">
+                            <label class="form-label d-block">Report Type <span class="text-danger">*</span></label>
+                            <div class="btn-group report-type-toggle" role="group" aria-label="Report Type">
+                                <input type="radio" class="btn-check" name="reportType" id="reportTypeLost" value="Lost" checked autocomplete="off">
+                                <label class="btn btn-outline-danger" for="reportTypeLost">
+                                    <i class="bi bi-exclamation-circle me-1"></i> I Lost Something
+                                </label>
+
+                                <input type="radio" class="btn-check" name="reportType" id="reportTypeFound" value="Found" autocomplete="off">
+                                <label class="btn btn-outline-success" for="reportTypeFound">
+                                    <i class="bi bi-check-circle me-1"></i> I Found Something
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- Item Name -->
+                            <div class="col-md-7">
+                                <label for="reportItemName" class="form-label">Item Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="reportItemName" placeholder="e.g. Apple AirPods Pro 2nd Gen" required>
+                                <div class="invalid-feedback">Please enter the item name.</div>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="col-md-5">
+                                <label for="reportCategory" class="form-label">Category <span class="text-danger">*</span></label>
+                                <select class="form-select" id="reportCategory" required>
+                                    <option value="" disabled selected>Select category...</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Documents">Documents &amp; IDs</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Books">Books &amp; Study Material</option>
+                                    <option value="Personal Belongings">Personal Belongings</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a category.</div>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="col-md-7">
+                                <label for="reportLocation" class="form-label" id="reportLocationLabel">Campus Location <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="reportLocation" placeholder="e.g. Central Library, 2nd Floor Silent Room" required>
+                                <div class="invalid-feedback">Please specify the location.</div>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="col-md-5">
+                                <label for="reportDate" class="form-label" id="reportDateLabel">Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="reportDate" required>
+                                <div class="invalid-feedback">Please select the date.</div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-12">
+                                <label for="reportDescription" class="form-label">Detailed Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="reportDescription" rows="3" placeholder="Provide distinct characteristics: color, brand, stickers, unique scratches, contents..." required></textarea>
+                                <div class="invalid-feedback">Please provide a descriptive note.</div>
+                            </div>
+
+                            <!-- User Name -->
+                            <div class="col-md-6">
+                                <label for="reportUserName" class="form-label">Your Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="reportUserName" placeholder="e.g. Rohan Sharma" required>
+                                <div class="invalid-feedback">Please provide your name.</div>
+                            </div>
+
+                            <!-- Contact Info -->
+                            <div class="col-md-6">
+                                <label for="reportContact" class="form-label">Contact Email or Phone <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="reportContact" placeholder="e.g. rohan.s@campus.edu or (555) 123-4567" required>
+                                <div class="invalid-feedback">Please provide an email or phone number.</div>
+                            </div>
+
+                            <!-- Image URL (Optional) -->
+                            <div class="col-12">
+                                <label for="reportImageUrl" class="form-label">Image URL <span class="text-muted fw-normal">(Optional)</span></label>
+                                <input type="url" class="form-control" id="reportImageUrl" placeholder="https://example.com/item-photo.jpg (leave blank for auto-generated category icon)">
+                                <div class="form-text">Tip: If left blank, a high-quality category representation will be used automatically.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold" id="btnSubmitReport">
+                            <i class="bi bi-cloud-arrow-up-fill me-1"></i> Submit Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         ITEM CONTACT & CLAIM MODAL
+         ====================================================================== -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title fw-bold mb-0" id="modalItemName">Item Details</h5>
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span class="badge" id="modalItemStatus">Status</span>
+                            <span class="text-muted small" id="modalItemCategory">Category</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Item Metadata -->
+                    <div class="bg-light p-3 rounded-3 mb-3 border">
+                        <div class="mb-2">
+                            <strong class="text-dark"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Location:</strong>
+                            <span id="modalItemLocation" class="text-muted"></span>
+                        </div>
+                        <div class="mb-2">
+                            <strong class="text-dark"><i class="bi bi-calendar3 text-primary me-1"></i> Date Reported:</strong>
+                            <span id="modalItemDate" class="text-muted"></span>
+                        </div>
+                        <div>
+                            <strong class="text-dark"><i class="bi bi-info-circle text-primary me-1"></i> Details:</strong>
+                            <p id="modalItemDescription" class="text-muted small mb-0 mt-1"></p>
+                        </div>
+                    </div>
+
+                    <!-- Reporter Contact Card -->
+                    <div class="card border-primary border-opacity-25 bg-primary bg-opacity-10 p-3 rounded-3 mb-3">
+                        <h6 class="fw-bold text-primary mb-2">Reporter Information</h6>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <i class="bi bi-person-fill text-dark"></i>
+                            <span class="fw-semibold text-dark" id="modalReporterName">Reporter</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-envelope-fill text-dark"></i>
+                            <a href="#" id="modalReporterEmail" class="fw-semibold text-primary">contact@campus.edu</a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Message Form -->
+                    <form id="quickMessageForm">
+                        <h6 class="fw-bold mb-2">Send Direct Message</h6>
+                        <div class="mb-2">
+                            <input type="email" class="form-control form-control-sm" id="quickSenderEmail" placeholder="Your campus email..." required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control form-control-sm" id="quickMessageText" rows="2" placeholder="Hi, I believe this item belongs to me! Let's arrange a handover..." required></textarea>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-outline-success btn-sm" id="btnMarkClaimed">
+                                <i class="bi bi-patch-check-fill me-1"></i> Mark as Returned
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-sm rounded-pill px-3">
+                                <i class="bi bi-send-fill me-1"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         TOAST NOTIFICATION CONTAINER (Bootstrap 5 Toasts)
+         ====================================================================== -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastPlacement" style="z-index: 1080;">
+        <!-- Dynamic toasts inserted here by script.js -->
+    </div>
+
+    <!-- Bootstrap 5.3.3 Bundle with Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom Frontend Script -->
+    <script src="script.js"></script>
+</body>
+</html>
